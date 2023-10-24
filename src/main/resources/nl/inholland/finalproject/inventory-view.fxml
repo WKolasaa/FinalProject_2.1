@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="nl.inholland.finalproject.Controller.InventoryController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <Label alignment="CENTER" layoutX="200" prefWidth="300" prefHeight="40" text="Product Inventory">
+        <font>
+            <Font name="Comic Sans MS" size="20.0" />
+        </font>
+    </Label>
+
+    <TableView fx:id="inventoryViewTable" layoutX="10" layoutY="50" prefHeight="600" prefWidth="660">
+        <columns>
+            <TableColumn fx:id="stock" prefWidth="80" text="Stock" />
+            <TableColumn fx:id="name" prefWidth="230" text="Name" />
+            <TableColumn fx:id="category" prefWidth="175" text="Category" />
+            <TableColumn fx:id="price" prefWidth="175" text="Price" />
+            <TableColumn fx:id="description" prefWidth="175" text="Description" />
+        </columns>
+    </TableView>
+
+    <HBox alignment="CENTER" layoutX="8" layoutY="420" prefHeight="120" prefWidth="650">
+        <children>
+            <Button fx:id="addProduct" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#onAddInventoryClick" text="Add Product" translateX="5.0" translateY="-10.0" />
+            <Button fx:id="editProduct" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#onEditInventoryClick" text="Edit Product" translateX="10.0" translateY="-10.0" />
+            <Button fx:id="deleteProduct" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="onDeleteInventoryClick" text="Delete Product" translateX="15.0" translateY="-10.0" />
+        </children>
+    </HBox>
+
+    <Label fx:id="errorMessageLabel" layoutX="8" layoutY="480" prefHeight="120" prefWidth="650" textFill="red">
+        <font>
+            <Font name="Comic Sans MS" size="18.0" />
+        </font>
+    </Label>
+
+</AnchorPane>
