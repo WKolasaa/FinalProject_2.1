@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="600.0" maxWidth="720.0" minHeight="600.0" minWidth="720.0" prefHeight="600.0" prefWidth="720.0" style="-fx-background-radius: 30;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.finalproject.LoginController">
+<BorderPane maxHeight="600.0" maxWidth="720.0" minHeight="600.0" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-radius: 30;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.finalproject.Controller.LoginController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="223.0" style="-fx-background-color: #820711;" BorderPane.alignment="CENTER">
             <children>
