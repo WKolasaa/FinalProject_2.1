@@ -10,8 +10,8 @@ public class UserDatabase {
 
     public UserDatabase() {
         users = new ArrayList<>();
-        User user1 = new User("admin", "admin", User.Role.ADMIN);
-        User user2 = new User("user", "user", User.Role.USER);
+        User user1 = new User("admin", "admin", User.Role.Manager);
+        User user2 = new User("user", "user", User.Role.Sales);
 
         users.add(user1);
         users.add(user2);
