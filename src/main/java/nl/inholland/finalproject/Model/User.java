@@ -13,7 +13,8 @@ public class User implements Serializable {
     private String hashedPassword;
 
     public enum Role{
-        ADMIN, USER
+        Manager,
+        Sales
     }
 
     public User(String username, String password, Role role){

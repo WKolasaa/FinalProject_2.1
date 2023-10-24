@@ -1,19 +1,22 @@
 package nl.inholland.finalproject.Database;
 
+import nl.inholland.finalproject.Model.Product;
 import nl.inholland.finalproject.Model.User;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Database implements Serializable {
-    private List<User> users;
+    private List<User> users = new ArrayList<>();;
+    private Map<Integer, Product> products = new HashMap<>();
     private static final long serialVersionUID = 315557262292413227L;
 
     public Database() {
-        users = new ArrayList<>();
-        User user1 = new User("admin", "admin", User.Role.ADMIN);
-        User user2 = new User("user", "user", User.Role.USER);
+        User user1 = new User("admin", "admin", User.Role.Manager);
+        User user2 = new User("user", "user", User.Role.Sales);
 
         users.add(user1);
         users.add(user2);
@@ -47,5 +50,13 @@ public class Database implements Serializable {
             }
         }
         return null;
+    }
+
+    public void addProduct(Product product){
+        products.put(product.getId(), product);
+        serialize();
+    }
+    public List<Product> getAllProducts(){
+        return new ArrayList<>(products.values());
     }
 }

@@ -60,7 +60,7 @@ public class HelloController implements Initializable {
     }
 
     public void createOrderClick(ActionEvent actionEvent) {
-
+        loadScene("createOrder-view.fxml", new CreateOrderController(database));
     }
 
     public void productInventoryClick(ActionEvent actionEvent){
