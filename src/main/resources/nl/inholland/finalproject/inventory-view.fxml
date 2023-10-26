@@ -9,7 +9,6 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="nl.inholland.finalproject.Controller.InventoryController"
             prefHeight="400.0" prefWidth="600.0">
 
     <Label alignment="CENTER" layoutX="200" prefWidth="300" prefHeight="40" text="Product Inventory">
@@ -18,7 +17,7 @@
         </font>
     </Label>
 
-    <TableView fx:id="inventoryViewTable" layoutX="10" layoutY="50" prefHeight="600" prefWidth="660">
+    <TableView fx:id="inventoryViewTable" layoutX="10" layoutY="50" prefHeight="200" prefWidth="660">
         <columns>
             <TableColumn fx:id="stock" prefWidth="80" text="Stock" />
             <TableColumn fx:id="name" prefWidth="230" text="Name" />
@@ -28,15 +27,51 @@
         </columns>
     </TableView>
 
-    <HBox alignment="CENTER" layoutX="8" layoutY="420" prefHeight="120" prefWidth="650">
+    <HBox alignment="CENTER_RIGHT" layoutX="350" layoutY="280" prefHeight="120" prefWidth="200">
         <children>
-            <Button fx:id="addProduct" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#onAddInventoryClick" text="Add Product" translateX="5.0" translateY="-10.0" />
-            <Button fx:id="editProduct" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#onEditInventoryClick" text="Edit Product" translateX="10.0" translateY="-10.0" />
-            <Button fx:id="deleteProduct" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="onDeleteInventoryClick" text="Delete Product" translateX="15.0" translateY="-10.0" />
+            <Button fx:id="addProduct" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#onAddInventoryClick" text="Add" translateX="10.0" translateY="-10.0" />
+            <Button fx:id="editProduct" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#onEditInventoryClick" text="Edit" translateX="10.0" translateY="-10.0" />
+            <Button fx:id="deleteProduct" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#onDeleteInventoryClick" text="Delete" translateX="10.0" translateY="-10.0" />
         </children>
     </HBox>
 
-    <Label fx:id="errorMessageLabel" layoutX="8" layoutY="480" prefHeight="120" prefWidth="650" textFill="red">
+    <Label layoutX="25" layoutY="250" text="Stock">
+        <font>
+            <Font name="Comic Sans MS" size="18.0" />
+        </font>
+    </Label>
+
+    <Label layoutX="25" layoutY="280" text="Name">
+        <font>
+            <Font name="Comic Sans MS" size="18.0" />
+        </font>
+    </Label>
+
+    <Label layoutX="25" layoutY="310" text="Category">
+        <font>
+            <Font name="Comic Sans MS" size="18.0" />
+        </font>
+    </Label>
+
+    <Label layoutX="25" layoutY="340" text="Price">
+        <font>
+            <Font name="Comic Sans MS" size="18.0" />
+        </font>
+    </Label>
+
+    <Label layoutX="25" layoutY="370" text="Description">
+        <font>
+            <Font name="Comic Sans MS" size="18.0" />
+        </font>
+    </Label>
+
+    <TextField fx:id="stockTF" layoutX="140" layoutY="250"/>
+    <TextField fx:id="nameTF" layoutX="140" layoutY="280"/>
+    <TextField fx:id="categoryTF" layoutX="140" layoutY="310"/>
+    <TextField fx:id="priceTF" layoutX="140" layoutY="340"/>
+    <TextField fx:id="descriptionTF" layoutX="140" layoutY="370"/>
+
+    <Label fx:id="errorMessageLabel" layoutX="8" layoutY="390" prefHeight="120" prefWidth="650" textFill="red">
         <font>
             <Font name="Comic Sans MS" size="18.0" />
         </font>

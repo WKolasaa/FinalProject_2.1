@@ -3,19 +3,22 @@ package nl.inholland.finalproject.Controller;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import nl.inholland.finalproject.Database.Database;
 import nl.inholland.finalproject.Model.Product;
+import nl.inholland.finalproject.Service.ProductService;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class InventoryController implements Initializable {
     @FXML
-    private TableView<Product> productsTables;
+    private TableView<Product> inventoryViewTable;
     @FXML
     private TableColumn<Product, Integer> stock;
     @FXML
@@ -34,24 +37,35 @@ public class InventoryController implements Initializable {
     private Button deleteProduct;
     @FXML
     private Label errorMessageLabel;
+    @FXML
+    private TextField stockTF;
+    @FXML
+    private TextField nameTF;
+    @FXML
+    private TextField priceTF;
+    @FXML
+    private TextField categoryTF;
+    @FXML
+    private TextField descriptionTF;
+    private ProductService productService;
 
     private Database database;
-    private Product product;
+    private Product editingProduct;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            ObservableList<Product> products = FXCollections.observableArrayList(database.getAllProducts());
-            productsTables.setItems(products);
+            ObservableList<Product> products = FXCollections.observableList(productService.getAllProducts());
+            inventoryViewTable.setItems(products);
             stock.setCellValueFactory(new PropertyValueFactory<>("stock"));
             name.setCellValueFactory(new PropertyValueFactory<>("name"));
             category.setCellValueFactory(new PropertyValueFactory<>("category"));
             price.setCellValueFactory(new PropertyValueFactory<>("price"));
             description.setCellValueFactory(new PropertyValueFactory<>("description"));
-            productsTables.setRowFactory(tv -> new TableRow<Product>() {
+            inventoryViewTable.setRowFactory(tv -> new TableRow<Product>() {
                 @Override
                 protected void updateItem(Product product, boolean empty) {
                     super.updateItem(product, empty);
-                    if (product == null) {
+                    if (product == null || empty) {
                         setStyle("");
                     } else if (product.getStock() == 0) {
                         setStyle("-fx-background-color: #ff0000");
@@ -62,7 +76,8 @@ public class InventoryController implements Initializable {
                     }
                 }
             });
-            productsTables.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            inventoryViewTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            inventoryViewTable.getSortOrder().add(stock);
         } catch (Exception e) {
             errorMessageLabel.setText(e.getMessage());
         }
@@ -70,31 +85,32 @@ public class InventoryController implements Initializable {
 
     public InventoryController(Database database) {
         this.database = database;
-        product = null;
+        editingProduct = null;
+        productService = new ProductService(database);
     }
 
     @FXML
-    private void onAddInventoryClick(){
+    private void onAddInventoryClick(ActionEvent event){
         try{
-            int tmpStock = Integer.parseInt(stock.getText());
-            String tmpName = name.getText();
-            double tmpPrice = Double.parseDouble(price.getText());
-            String tmpCategory = category.getText();
-            String tmpDescription = description.getText();
+            int tmpStock = Integer.parseInt(stockTF.getText());
+            String tmpName = nameTF.getText();
+            double tmpPrice = Double.parseDouble(priceTF.getText());
+            String tmpCategory = categoryTF.getText();
+            String tmpDescription = descriptionTF.getText();
 
             if(emptyField(tmpStock, tmpName, tmpPrice, tmpCategory, tmpDescription)){
                 errorMessageLabel.setText("Please fill in all fields");
+                return;
             }
 
             Product product = new Product(tmpStock, tmpName, tmpCategory, tmpPrice, tmpDescription);
 
             database.addProduct(product);
-            productsTables.getItems().add(product);
-            database.serialize();
-
+            inventoryViewTable.getItems().add(product);
             clearFields();
         }catch (Exception e){
             errorMessageLabel.setText(e.getMessage());
+            //System.out.println(e.getMessage());
         }
     }
 
@@ -103,27 +119,69 @@ public class InventoryController implements Initializable {
     }
 
     private void clearFields(){
-        stock.setText("");
-        name.setText("");
-        price.setText("");
-        category.setText("");
-        description.setText("");
+        stockTF.clear();
+        nameTF.clear();
+        priceTF.clear();
+        categoryTF.clear();
+        descriptionTF.clear();
     }
 
     @FXML
-    private void onEditInventoryClick(){
+    private void onEditInventoryClick(ActionEvent event){
         try{
-            Product selectedProduct = productsTables.getSelectionModel().getSelectedItem();
+            Product selectedProduct = inventoryViewTable.getSelectionModel().getSelectedItem();
             if(selectedProduct != null){
-                stock.setText(String.valueOf(selectedProduct.getStock()));
-                name.setText(selectedProduct.getName());
-                price.setText(String.valueOf(selectedProduct.getPrice()));
-                category.setText(selectedProduct.getCategory());
-                description.setText(selectedProduct.getDescription());
-                product = selectedProduct;
+                importData(selectedProduct);
+
+                stockTF.textProperty().addListener((observable, oldValue, newValue) -> saveChanges());
+                nameTF.textProperty().addListener((observable, oldValue, newValue) -> saveChanges());
+                priceTF.textProperty().addListener((observable, oldValue, newValue) -> saveChanges());
+                categoryTF.textProperty().addListener((observable, oldValue, newValue) -> saveChanges());
+                descriptionTF.textProperty().addListener((observable, oldValue, newValue) -> saveChanges());
             }
         }catch (Exception e){
             errorMessageLabel.setText(e.getMessage());
+        }
+    }
+
+    private void importData(Product selectedProduct){
+        stockTF.setText(String.valueOf(selectedProduct.getStock()));
+        nameTF.setText(selectedProduct.getName());
+        priceTF.setText(String.valueOf(selectedProduct.getPrice()));
+        categoryTF.setText(String.valueOf(selectedProduct.getCategory()));
+        descriptionTF.setText(selectedProduct.getDescription());
+        editingProduct = selectedProduct;
+    }
+
+    private void saveChanges(){
+        if (editingProduct != null) {
+            try {
+                editingProduct.setStock(Integer.parseInt(stockTF.getText()));
+                editingProduct.setName(nameTF.getText());
+                editingProduct.setPrice(Double.parseDouble(priceTF.getText()));
+                editingProduct.setCategory((categoryTF.getText()));
+                editingProduct.setDescription(descriptionTF.getText());
+
+                productService.updateProduct(editingProduct);
+
+                inventoryViewTable.refresh();
+            } catch (Exception e) {
+                errorMessageLabel.setText("something went wrong");
+            }
+        }
+    }
+
+    @FXML
+    private void onDeleteInventoryClick(ActionEvent event){
+        editingProduct = inventoryViewTable.getSelectionModel().getSelectedItem();
+        if(editingProduct != null){
+            try{
+                productService.removeProduct(editingProduct);
+                inventoryViewTable.getItems().remove(editingProduct);
+                clearFields();
+            } catch (Exception e){
+                errorMessageLabel.setText(e.getMessage());
+            }
         }
     }
 }

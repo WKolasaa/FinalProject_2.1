@@ -25,10 +25,6 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        database = Database.deserialize();
-        if (database == null) {
-            database = new Database();
-        }
         loadScene("dashboard-view.fxml", new DashboardController(database));
     }
     public void logUser(User user){
@@ -64,10 +60,14 @@ public class HelloController implements Initializable {
     }
 
     public void productInventoryClick(ActionEvent actionEvent){
-
+        loadScene("inventory-view.fxml", new InventoryController(database));
     }
 
     public void orderHistoryClick(ActionEvent actionEvent){
 
+    }
+
+    public void setDatabase(Database database) {
+        this.database = database;
     }
 }

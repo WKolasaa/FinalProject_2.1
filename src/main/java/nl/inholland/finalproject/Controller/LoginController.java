@@ -72,6 +72,7 @@ public class LoginController {
 
             HelloController mainController = fxmlLoader.getController();
             mainController.logUser(loggedUser);
+            mainController.setDatabase(database);
 
             Stage currentStage = (Stage) loginButton.getScene().getWindow();
             currentStage.setWidth(900);

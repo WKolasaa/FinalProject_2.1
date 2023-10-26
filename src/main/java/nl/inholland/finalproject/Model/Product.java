@@ -1,6 +1,7 @@
 package nl.inholland.finalproject.Model;
 
 import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Product implements Serializable {
     private int id;
@@ -9,10 +10,10 @@ public class Product implements Serializable {
     private String category;
     private double price;
     private String description;
-    private int i=0;
+    private static AtomicInteger nextId = new AtomicInteger(0);
 
     public Product(int stock, String name, String category, double price, String description) {
-        this.id = i++;
+        this.id = nextId.getAndIncrement();
         this.stock = stock;
         this.name = name;
         this.category = category;
