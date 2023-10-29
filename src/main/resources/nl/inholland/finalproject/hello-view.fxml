@@ -5,12 +5,19 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="nl.inholland.finalproject.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<?import javafx.scene.layout.HBox?>
+<HBox fx:id="hbox" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.inholland.finalproject.Controller.HelloController">
+    <children>
+        <VBox spacing="10.0" style="-fx-background-color: #820711;">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="80.0" />
+            </padding>
+            <children>
+                <Button id="dashboardButton" minWidth="150" onAction="#dashboardClick" style="-fx-text-fill: white;-fx-background-color: #820711;-fx-padding: 5px;-fx-font-size: 18;" text="Dashboard" />
+                <Button id="createOrderButton" minWidth="150" onAction="#createOrderClick" style="-fx-text-fill: white;-fx-background-color: #820711;-fx-padding: 5px;-fx-font-size: 18;" text="Create Order" />
+                <Button fx:id="productInventoryButton" minWidth="150" onAction="#productInventoryClick" style="-fx-text-fill: white;-fx-background-color: #820711;-fx-padding: 5px;-fx-font-size: 18;" text="Product Inventory" />
+                <Button id="orderHistoryButton" minWidth="150" onAction="#orderHistoryClick" style="-fx-text-fill: white;-fx-background-color: #820711;-fx-padding: 5px;-fx-font-size: 18;" text="Order History" />
+            </children>
+        </VBox>
+    </children>
+</HBox>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      prefHeight="400.0" prefWidth="600.0">
+
+    <Label text="Order History">
+        <font>
+            <Font name="System Bold" size="20.0" />
+        </font>
+    </Label>
+
+    <TableView fx:id="orderListView" prefHeight="200" prefWidth="630">
+        <columns>
+            <TableColumn fx:id="dateTimeColumn" prefWidth="220.79999160766602" text="Date/Time" />
+            <TableColumn fx:id="orderNameColumn" prefWidth="285.6000213623047" text="Name" />
+            <TableColumn fx:id="totalPriceColumn" prefWidth="129.60003662109375" text="Totalprice" />
+        </columns>
+    </TableView>
+
+    <Label text="Ordered products">
+        <font>
+            <Font name="System Bold" size="20.0" />
+        </font>
+    </Label>
+
+    <TableView fx:id="historyListView" prefHeight="200" prefWidth="630">
+        <columns>
+            <TableColumn fx:id="quantityColumn" prefWidth="80.00000381469727" text="Quantity" />
+            <TableColumn fx:id="productNameColumn" prefWidth="223.1999969482422" text="Name" />
+            <TableColumn fx:id="productCategoryColumn" prefWidth="215.20001220703125" text="Category" />
+            <TableColumn fx:id="productPriceColumn" prefWidth="111.20001220703125" text="Price" />
+        </columns>
+    </TableView>
+
+</VBox>

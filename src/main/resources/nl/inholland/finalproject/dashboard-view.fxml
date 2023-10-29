@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fitWidth="800" fitHeight="600">
+            <image>
+                <Image url="@dungeonBackground.jpg"/>
+            </image>
+        </ImageView>
+        <Label fx:id="welcomeUser" layoutX="126.0" layoutY="42.0" prefHeight="19.0" prefWidth="294.0" textFill="white">
+            <font>
+                <Font name="Comic Sans MS" size="18.0" />
+            </font></Label>
+        <Label layoutX="82.0" layoutY="86.0" prefHeight="18.0" prefWidth="99.0" text="You are:" textFill="white">
+            <font>
+                <Font name="Comic Sans MS" size="12.0" />
+            </font></Label>
+        <Label layoutX="82.0" layoutY="116.0" prefHeight="18.0" prefWidth="62.0" text="It's:" textFill="white">
+            <font>
+                <Font name="Comic Sans MS" size="12.0" />
+            </font>
+        </Label>
+        <Label fx:id="userRole" layoutX="155.0" layoutY="87.0" prefHeight="18.0" prefWidth="48.0" textFill="white">
+            <font>
+                <Font name="Comic Sans MS" size="12.0" />
+            </font>
+        </Label>
+        <Label fx:id="dateTime" layoutX="155.0" layoutY="116.0" prefHeight="18.0" prefWidth="252.0" textFill="white">
+            <font>
+                <Font name="Comic Sans MS" size="12.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
