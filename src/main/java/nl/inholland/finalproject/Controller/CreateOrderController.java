@@ -95,7 +95,7 @@ public class CreateOrderController implements Initializable {
             Order currentOrder = new Order(firstName.getText(), lastName.getText(), email.getText(), phoneNumber.getText());
             currentOrder.setOrderedItems(new ArrayList<>(observableList));
             orderService.addOrder(currentOrder);
-
+            System.out.println(database.getAllOrders().size());
             refresh();
             resetFields();
         }

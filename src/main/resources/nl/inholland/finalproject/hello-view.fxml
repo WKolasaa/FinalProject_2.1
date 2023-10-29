@@ -15,7 +15,7 @@
             <children>
                 <Button id="dashboardButton" minWidth="150" onAction="#dashboardClick" style="-fx-text-fill: white;-fx-background-color: #820711;-fx-padding: 5px;-fx-font-size: 18;" text="Dashboard" />
                 <Button id="createOrderButton" minWidth="150" onAction="#createOrderClick" style="-fx-text-fill: white;-fx-background-color: #820711;-fx-padding: 5px;-fx-font-size: 18;" text="Create Order" />
-                <Button id="productInventoryButton" minWidth="150" onAction="#productInventoryClick" style="-fx-text-fill: white;-fx-background-color: #820711;-fx-padding: 5px;-fx-font-size: 18;" text="Product Inventory" />
+                <Button fx:id="productInventoryButton" minWidth="150" onAction="#productInventoryClick" style="-fx-text-fill: white;-fx-background-color: #820711;-fx-padding: 5px;-fx-font-size: 18;" text="Product Inventory" />
                 <Button id="orderHistoryButton" minWidth="150" onAction="#orderHistoryClick" style="-fx-text-fill: white;-fx-background-color: #820711;-fx-padding: 5px;-fx-font-size: 18;" text="Order History" />
             </children>
         </VBox>

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -19,13 +20,17 @@ import java.util.ResourceBundle;
 public class HelloController implements Initializable {
     @FXML
     private HBox hbox;
+    @FXML
+    private Button productInventoryButton;
     private Database database;
     private User loggedUser;
     private Stage stage;
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadScene("dashboard-view.fxml", new DashboardController(database));
+        productInventoryButton.setVisible(true);
     }
     public void logUser(User user){
         loggedUser = user;
@@ -60,11 +65,16 @@ public class HelloController implements Initializable {
     }
 
     public void productInventoryClick(ActionEvent actionEvent){
-        loadScene("inventory-view.fxml", new InventoryController(database));
+        if(loggedUser.getRole() == User.Role.Manager){
+            loadScene("inventory-view.fxml", new InventoryController(database));
+        }
+        else{
+            productInventoryButton.setVisible(false);
+        }
     }
 
     public void orderHistoryClick(ActionEvent actionEvent){
-
+        loadScene("history-view.fxml", new HistoryController(database));
     }
 
     public void setDatabase(Database database) {

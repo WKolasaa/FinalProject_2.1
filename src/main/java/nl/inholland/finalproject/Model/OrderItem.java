@@ -22,4 +22,16 @@ public class OrderItem implements Serializable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    public double getPrice() {
+        return product.getPrice() * quantity;
+    }
+    public double getUnitPrice() {
+        return product.getPrice();
+    }
+    public String getName() {
+        return product.getName();
+    }
+    public String getCategory() {
+        return product.getCategory();
+    }
 }
