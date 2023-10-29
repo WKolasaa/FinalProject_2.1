@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import nl.inholland.finalproject.Database.Database;
-import nl.inholland.finalproject.Database.UserDatabase;
 import nl.inholland.finalproject.HelloApplication;
 import nl.inholland.finalproject.Model.Exceptions;
 import nl.inholland.finalproject.Model.User;
